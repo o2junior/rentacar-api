@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+
+  rentcar_db:
+    container_name: rentcar_db
+    image: rentcar_pg
+    build:
+      context: ./sql
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      POSTGRES_DB: rentcar_db
+      POSTGRES_USER: rent.user
+      POSTGRES_PASSWORD: rent.password
+    ports:
+      - 5432:5432
+    networks:
+      - local
+
+networks:
+  local:
+    driver: bridge

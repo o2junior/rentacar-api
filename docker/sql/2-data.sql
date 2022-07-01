@@ -1,0 +1,1 @@
+insert into tb_make (name) values ('fiat'), ('volkswagem'), ('chevrolet'), ('ford');
