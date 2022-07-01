@@ -13,9 +13,13 @@ import java.util.UUID;
 
 @Repository
 public interface CarRepository extends JpaRepository<Car, UUID> {
+
     Page<Car> findAllByAvailable(Boolean available, Pageable pageable);
+
     Page<Car> findAllByModel(String mode, Pageable pageable);
+
     @Transactional
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     Car save(Car car);
+
 }

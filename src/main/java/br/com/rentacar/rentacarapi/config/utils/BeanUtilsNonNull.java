@@ -1,4 +1,4 @@
-package br.com.rentacar.rentacarapi.utils;
+package br.com.rentacar.rentacarapi.config.utils;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;

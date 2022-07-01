@@ -31,16 +31,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @EnableSpringDataWebSupport
 class CarControllerTest {
 
+
     @Mock CreateCarUseCase createCarUseCase;
     @Mock DeleteCarUseCase deleteCarUseCase;
-    @Mock
-    GetListCarsUseCase getListCarsUseCase;
+    @Mock GetListCarsUseCase getListCarsUseCase;
     @Mock GetCarUseCase getCarUseCase;
     @Mock UpdateCarUseCase updateCarUseCase;
 
     private MockMvc mockMvc;
     final ObjectMapper objectMapper = new ObjectMapper();
-    private final String token = "eyJhbGciOiJIUzI1NiIsImN0eSI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJNYXJjaW8gSnIiLCJpYXQiOjE1MTYyMzkwMjJ9.rT7fYAjRnlCdGWcQL6xVFyCvEB6tTNsVMGJu2K40QHg";
+    private static String TOKEN = "eyJhbGciOiJIUzI1NiIsImN0eSI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJNYXJjaW8gSnIiLCJpYXQiOjE1MTYyMzkwMjJ9.rT7fYAjRnlCdGWcQL6xVFyCvEB6tTNsVMGJu2K40QHg";
+    private static String VALID_UUID = "25bd0b1e-3a2a-42a8-bb12-f78ef4996297";
 
     @BeforeEach
     public void setUp() {
@@ -107,7 +108,7 @@ class CarControllerTest {
     @Test
     void getCarByIdShouldReturnSuccessfully() throws Exception {
         // given
-        final String path = "/v1/api/car/25bd0b1e-3a2a-42a8-bb12-f78ef4996297";
+        final String path = "/v1/api/car/" + VALID_UUID;
 
         // when
         final ResultActions resultActions =
@@ -132,12 +133,30 @@ class CarControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    void updateCarShouldReturnSuccessfully() throws Exception {
+        // given
+        final CarRequest payload = CarRequest.builder()
+                                             .makeId(10012L)
+                                             .model("Model Teste")
+                                             .build();
+        final String path = "/v1/api/car/" + VALID_UUID;
+
+        // when
+        final ResultActions resultActions =
+                getPerformHttpResult(objectMapper.writeValueAsString(payload), get(path));
+
+        // then
+        resultActions
+                .andExpect(status().isOk());
+    }
+
     private ResultActions getPerformHttpResult(String payload,
                                                MockHttpServletRequestBuilder method) throws Exception {
         return mockMvc.perform(
                 method.contentType(MediaType.APPLICATION_JSON)
                       .accept(MediaType.APPLICATION_JSON)
-                      .header(HttpHeaders.AUTHORIZATION, token)
+                      .header(HttpHeaders.AUTHORIZATION, TOKEN)
                       .content(payload != null ? payload : "{}"));
     }
 }

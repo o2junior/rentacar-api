@@ -1,4 +1,4 @@
-package br.com.rentacar.rentacarapi.adapter;
+package br.com.rentacar.rentacarapi.config.adapter;
 
 public interface Adapter<Source, Destination> {
 

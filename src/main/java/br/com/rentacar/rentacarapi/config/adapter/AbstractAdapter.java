@@ -1,4 +1,4 @@
-package br.com.rentacar.rentacarapi.adapter;
+package br.com.rentacar.rentacarapi.config.adapter;
 
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;

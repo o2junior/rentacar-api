@@ -10,7 +10,7 @@ import br.com.rentacar.rentacarapi.repository.MakeRepository;
 import br.com.rentacar.rentacarapi.usecase.UseCase;
 import br.com.rentacar.rentacarapi.usecase.adapter.CarAdapter;
 import br.com.rentacar.rentacarapi.usecase.adapter.CarResponseAdapter;
-import br.com.rentacar.rentacarapi.utils.BeanUtilsNonNull;
+import br.com.rentacar.rentacarapi.config.utils.BeanUtilsNonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

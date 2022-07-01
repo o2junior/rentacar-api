@@ -1,12 +1,12 @@
 package br.com.rentacar.rentacarapi.controller.handler.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.RequiredArgsConstructor;
+import lombok.Data;
+
+import java.io.Serializable;
 
 @Builder
-@RequiredArgsConstructor
-@AllArgsConstructor
-public class GeneralErrorResponse {
+@Data
+public class GeneralErrorResponse implements Serializable {
     private String detail;
 }

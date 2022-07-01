@@ -5,7 +5,7 @@ create table tb_car
     make_id      int8                  not null,
     available    boolean default false not null,
     created_at   timestamp,
-    created_by   varchar(100),
+    created_by   varchar(100) default ('UNKNOWN_USER'),
     updated_at   timestamp,
     deleted_tmsp timestamp,
     primary key (id)
@@ -16,7 +16,7 @@ create table tb_make
     id           int8         not null DEFAULT nextval('tb_make_id_seq'),
     name         varchar(255) not null unique,
     created_at   timestamp default current_timestamp,
-    created_by   varchar(100),
+    created_by   varchar(100) default ('UNKNOWN_USER'),
     updated_at   timestamp default current_timestamp,
     deleted_tmsp timestamp,
     primary key (id)

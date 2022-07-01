@@ -72,7 +72,7 @@ class UpdateCarUseCaseTest {
                 .thenReturn(Optional.ofNullable(null));
 
         // when/then
-        Assertions.assertThrows(NotFoundException.class, () -> updateCarUseCase.execute(CarRequest.builder().id(uuid).build()));
+        Assertions.assertThrows(NotFoundException.class, () -> updateCarUseCase.execute(CarRequest.builder().id(uuid).makeId(1L).build()));
     }
 
     @Test

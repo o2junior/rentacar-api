@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.Map;
 
@@ -18,10 +19,12 @@ import java.util.Map;
 @NoArgsConstructor
 public class GlobalControllerExceptionHandler {
 
+	public static final String ERROR = "error";
+
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<Map<String, GeneralErrorResponse>> handleException(final Exception exception) {
 		return ResponseEntity.status(HttpStatus.FORBIDDEN)
-				.body(Map.of("error", GeneralErrorResponse
+				.body(Map.of(ERROR, GeneralErrorResponse
 						.builder()
 						.detail(exception.getMessage())
 						.build()));
@@ -30,7 +33,7 @@ public class GlobalControllerExceptionHandler {
 	@ExceptionHandler(NotFoundException.class)
 	public ResponseEntity<Map<String, GeneralErrorResponse>> handleNotFoundException(final NotFoundException exception) {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND)
-				.body(Map.of("error", GeneralErrorResponse
+				.body(Map.of(ERROR, GeneralErrorResponse
 						.builder()
 						.detail(exception.getMessage())
 						.build()));
@@ -39,7 +42,7 @@ public class GlobalControllerExceptionHandler {
 	@ExceptionHandler({BadRequestException.class})
 	public ResponseEntity<Map<String, GeneralErrorResponse>> handleBadRequestException(final BadRequestException exception) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-				.body(Map.of("error", GeneralErrorResponse
+				.body(Map.of(ERROR, GeneralErrorResponse
 						.builder()
 						.detail(exception.getMessage())
 						.build()));
@@ -56,7 +59,23 @@ public class GlobalControllerExceptionHandler {
 										 .append(((FieldError)err).getRejectedValue())
 										 .append(" ]"));
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-				.body(Map.of("error", GeneralErrorResponse
+				.body(Map.of(ERROR, GeneralErrorResponse
+						.builder()
+						.detail(message.toString())
+						.build()));
+	}
+
+	@ExceptionHandler({MethodArgumentTypeMismatchException.class})
+	public ResponseEntity<Map<String, GeneralErrorResponse>> handleMethodArgumentTypeMismatchException(final MethodArgumentTypeMismatchException exception) {
+		StringBuilder message = new StringBuilder("Validation failed for field");
+		message.append(", [ ")
+				.append(exception.getName())
+				.append(String.format(" : cannot be of this type("))
+				.append(exception.getValue())
+				.append("). ]");
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+				.body(Map.of(ERROR, GeneralErrorResponse
 						.builder()
 						.detail(message.toString())
 						.build()));
