@@ -30,7 +30,7 @@ git clone https://github.com/o2junior/rentacar-api.git
 
 ### Environment Variables
 
-The application is with defaults values to use the database postgresql presents on docker folder,  
+The application is with defaults values to use the database postgresql present on docker folder,  
 but, if you wants up de application connected to another database, use the environment variables:
 * DB_HOST
 * DB_PORT
