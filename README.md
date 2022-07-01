@@ -4,10 +4,14 @@ This is a Spring Boot application responsible for control of Cars availables to 
 Exposed API manages configuration and register Cars and Makes.
 
 ## Stack
-* Java 14
-* Spring WebFlux
-* Spring Data R2DBC
+* Java 11
+* Spring MVC
+* Spring Data JPA
+* Spring Security
+* Log4j
+* Swagger2
 * PostgreSql
+* Lombok
 
 ## Getting Started
 
