@@ -1,6 +1,6 @@
 # rent-a-car API
 
-This is a Spring Boot web application responsible for control of Cars availables to rent.
+This is a Spring Boot application responsible for control of Cars availables to rent.
 Exposed API manages configuration and register Cars and Makes.
 
 ## Stack
