@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: test-docker
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/rentcar_db
+    username: ${DB_USER:rent.user}
+    password: ${DB_PASSWD:rent.password}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

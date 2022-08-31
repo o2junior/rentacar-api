@@ -1,20 +1,6 @@
 spring:
   application:
     name: rent-a-car-api
-  datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:5432/${DB_NAME:rentcar_db}
-    username: ${DB_USER:rent.user}
-    password: ${DB_PASSWD:rent.password}
-
-  jpa:
-    show-sql: ${SHOW_SQL_HIBERNATE:true}
-    hibernate:
-      ddl-auto: ${SHOW_SQL_HIBERNATE:update}
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        jdbc:
-          time_zone: UTC
 
 logging:
   config: "classpath:log4j2-local.xml"
